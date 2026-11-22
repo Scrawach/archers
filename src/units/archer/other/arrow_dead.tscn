@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://d2dv5jxk1o2rb"]
+
+[ext_resource type="PackedScene" uid="uid://bt8xxv3vg4xtb" path="res://units/archer/other/arrow_visual.tscn" id="1_f2xly"]
+[ext_resource type="Script" uid="uid://biv6g3mkntboq" path="res://units/archer/other/arrow_dead.gd" id="1_lwnxo"]
+
+[node name="Arrow Dead" type="Node3D" unique_id=1796917282]
+script = ExtResource("1_lwnxo")
+
+[node name="Arrow Visual" parent="." unique_id=623675467 instance=ExtResource("1_f2xly")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.3350051, 0)
+
+[node name="Timer" type="Timer" parent="." unique_id=1271670212]
+unique_name_in_owner = true
+wait_time = 10.0
+one_shot = true
+autostart = true

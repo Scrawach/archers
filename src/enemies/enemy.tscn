@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://oovt5txyfw7q"]
+
+[ext_resource type="Script" uid="uid://c70k3fmadgyid" path="res://enemies/enemy.gd" id="1_fw1ev"]
+[ext_resource type="Script" uid="uid://dy246ht71ckbo" path="res://common/hit_area_3d.gd" id="2_7frlh"]
+[ext_resource type="Script" uid="uid://dnn6t032pdgli" path="res://common/health.gd" id="3_orwns"]
+[ext_resource type="Script" uid="uid://d1ehu6o3nd5c0" path="res://enemies/enemy_death.gd" id="4_a6vjd"]
+[ext_resource type="Script" uid="uid://dgfv77wk504sa" path="res://enemies/death_drop.gd" id="5_07tka"]
+[ext_resource type="PackedScene" uid="uid://dlybx23et35mm" path="res://enemies/death_vfx.tscn" id="7_4w5fm"]
+[ext_resource type="Script" uid="uid://dd141w5w2wg7b" path="res://enemies/hit_vfx.gd" id="7_epsnb"]
+[ext_resource type="PackedScene" uid="uid://6o7twoxliy4j" path="res://common/progress_bar_3d.tscn" id="8_4w5fm"]
+[ext_resource type="Script" uid="uid://tg20y7bslwi3" path="res://enemies/health_bar.gd" id="9_uba7a"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_x4ssu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fw1ev"]
+albedo_color = Color(1, 0, 0, 1)
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+emission_energy_multiplier = 0.5
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_fw1ev"]
+radius = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_epsnb"]
+shading_mode = 0
+
+[node name="Enemy" type="Node3D" unique_id=633718175]
+script = ExtResource("1_fw1ev")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=963079914]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_x4ssu")
+surface_material_override/0 = SubResource("StandardMaterial3D_fw1ev")
+
+[node name="Hit Area3D" type="Area3D" parent="." unique_id=1592874030 node_paths=PackedStringArray("health")]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("2_7frlh")
+health = NodePath("../Health")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hit Area3D" unique_id=629857937]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("SphereShape3D_fw1ev")
+
+[node name="ProgressBar3D" parent="." unique_id=2058479204 instance=ExtResource("8_4w5fm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+visible = false
+
+[node name="Health" type="Node" parent="." unique_id=1897750748]
+script = ExtResource("3_orwns")
+current = 1
+max_health = 3
+metadata/_custom_type_script = "uid://dnn6t032pdgli"
+
+[node name="EnemyDeath" type="Node" parent="." unique_id=1127872298 node_paths=PackedStringArray("enemy", "health")]
+script = ExtResource("4_a6vjd")
+enemy = NodePath("..")
+health = NodePath("../Health")
+metadata/_custom_type_script = "uid://d1ehu6o3nd5c0"
+
+[node name="DeathDrop" type="Node" parent="." unique_id=1158668442 node_paths=PackedStringArray("body", "death")]
+script = ExtResource("5_07tka")
+body = NodePath("..")
+death = NodePath("../EnemyDeath")
+drop_scenes = Array[PackedScene]([ExtResource("7_4w5fm")])
+metadata/_custom_type_script = "uid://dgfv77wk504sa"
+
+[node name="HitVFX" type="Node" parent="." unique_id=1983028973 node_paths=PackedStringArray("mesh", "health")]
+script = ExtResource("7_epsnb")
+mesh = NodePath("../MeshInstance3D")
+health = NodePath("../Health")
+hit_material = SubResource("StandardMaterial3D_epsnb")
+metadata/_custom_type_script = "uid://dd141w5w2wg7b"
+
+[node name="HealthBar" type="Node" parent="." unique_id=1008599306 node_paths=PackedStringArray("health", "progress")]
+script = ExtResource("9_uba7a")
+health = NodePath("../Health")
+progress = NodePath("../ProgressBar3D")
+metadata/_custom_type_script = "uid://tg20y7bslwi3"

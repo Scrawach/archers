@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://bsaqpt1r26e0x"]
+
+[ext_resource type="Script" uid="uid://73ti5cgivn5x" path="res://addons/states/ui/prepare_panel.gd" id="1_w2xb4"]
+[ext_resource type="Theme" uid="uid://gnsteuuimcn0" path="res://main_theme.tres" id="2_x2stf"]
+[ext_resource type="PackedScene" uid="uid://blxsy443bkhas" path="res://meta/ui/upgrade_card.tscn" id="3_y66iv"]
+
+[node name="Prepare Panel" type="Control" unique_id=1243335251]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("2_x2stf")
+script = ExtResource("1_w2xb4")
+
+[node name="Start Button" type="Button" parent="." unique_id=2121737168]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -104.5
+offset_top = -55.0
+offset_right = 104.5
+grow_horizontal = 2
+grow_vertical = 0
+text = "NEXT WAVE"
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1746061363]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=454899695]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer/VBoxContainer" unique_id=360264224]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/PanelContainer" unique_id=1494833748]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "wave completed"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer" unique_id=890591468]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Upgrade Card" parent="CenterContainer/VBoxContainer/HBoxContainer" unique_id=1852986555 instance=ExtResource("3_y66iv")]
+layout_mode = 2
+
+[node name="Upgrade Card2" parent="CenterContainer/VBoxContainer/HBoxContainer" unique_id=407982710 instance=ExtResource("3_y66iv")]
+layout_mode = 2
+
+[node name="Upgrade Card3" parent="CenterContainer/VBoxContainer/HBoxContainer" unique_id=1654503596 instance=ExtResource("3_y66iv")]
+layout_mode = 2

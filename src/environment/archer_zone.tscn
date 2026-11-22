@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://cwjmjjkkuitl"]
+
+[ext_resource type="PackedScene" uid="uid://c0vg0pbj4p8ch" path="res://environment/assets/archers_zone.glb" id="1_ny8kq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_48wxr"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 0.6862745)
+
+[node name="Archer Zone" type="Node3D" unique_id=2055621701]
+
+[node name="archers_zone" parent="." unique_id=91129922 instance=ExtResource("1_ny8kq")]
+
+[node name="Plane_002" parent="archers_zone" index="0" unique_id=1387320236]
+surface_material_override/0 = SubResource("StandardMaterial3D_48wxr")
+
+[editable path="archers_zone"]

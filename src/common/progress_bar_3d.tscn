@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://6o7twoxliy4j"]
+
+[ext_resource type="Script" uid="uid://noidyxyu55v" path="res://common/progress_bar_3d.gd" id="1_1p4jj"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_epsnb"]
+viewport_path = NodePath("Sprite3D/SubViewport")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1p4jj"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oiw12"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_agust"]
+bg_color = Color(1, 1, 1, 1)
+
+[node name="ProgressBar3D" type="Node3D" unique_id=2058479204]
+script = ExtResource("1_1p4jj")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=764728853]
+pixel_size = 0.0005
+billboard = 1
+no_depth_test = true
+fixed_size = true
+render_priority = 2
+texture = SubResource("ViewportTexture_epsnb")
+
+[node name="SubViewport" type="SubViewport" parent="Sprite3D" unique_id=1994417759]
+size = Vector2i(256, 64)
+
+[node name="PanelContainer" type="PanelContainer" parent="Sprite3D/SubViewport" unique_id=951153288]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1p4jj")
+
+[node name="MarginContainer" type="MarginContainer" parent="Sprite3D/SubViewport/PanelContainer" unique_id=756549116]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Slow ProgressBar" type="ProgressBar" parent="Sprite3D/SubViewport/PanelContainer/MarginContainer" unique_id=772655598]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxEmpty_oiw12")
+theme_override_styles/fill = SubResource("StyleBoxFlat_agust")
+max_value = 1.0
+value = 0.5
+show_percentage = false
+
+[node name="ProgressBar" type="ProgressBar" parent="Sprite3D/SubViewport/PanelContainer/MarginContainer" unique_id=1769895776]
+unique_name_in_owner = true
+self_modulate = Color(1, 0, 0, 1)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxEmpty_oiw12")
+theme_override_styles/fill = SubResource("StyleBoxFlat_agust")
+max_value = 1.0
+value = 0.5
+show_percentage = false

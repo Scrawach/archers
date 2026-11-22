@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://dlybx23et35mm"]
+
+[ext_resource type="Script" uid="uid://ctc5072bl1yaw" path="res://common/destroy_timer.gd" id="1_6ue72"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_6ue72"]
+
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_jmrno"]
+shading_mode = 0
+
+[sub_resource type="Animation" id="Animation_6ue72"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_jmrno"]
+resource_name = "destroy"
+length = 0.40000334
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.23333333, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(2, 2, 2), Vector3(3, 3, 3), Vector3(0, 0, 0), Vector3(2, 2, 2), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rwern"]
+_data = {
+&"RESET": SubResource("Animation_6ue72"),
+&"destroy": SubResource("Animation_jmrno")
+}
+
+[node name="Death VFX" type="Node3D" unique_id=416159937]
+
+[node name="DestroyTimer" type="Timer" parent="." unique_id=628113612 node_paths=PackedStringArray("target")]
+one_shot = true
+autostart = true
+script = ExtResource("1_6ue72")
+target = NodePath("..")
+metadata/_custom_type_script = "uid://ctc5072bl1yaw"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=483404334]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+cast_shadow = 0
+mesh = SubResource("SphereMesh_6ue72")
+surface_material_override/0 = SubResource("ORMMaterial3D_jmrno")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MeshInstance3D" unique_id=1845114106]
+libraries/ = SubResource("AnimationLibrary_rwern")
+autoplay = &"destroy"

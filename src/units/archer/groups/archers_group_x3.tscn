@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://bwmkwb5fw2n6y"]
+
+[ext_resource type="Script" uid="uid://cvjx1gm5hk423" path="res://units/archer_group.gd" id="1_g0g7j"]
+[ext_resource type="PackedScene" uid="uid://bc328voe0h73j" path="res://units/archer/archer.tscn" id="2_vw5vr"]
+
+[node name="ArchersGroupX3" type="Node3D" unique_id=1900303507 node_paths=PackedStringArray("archers")]
+script = ExtResource("1_g0g7j")
+archers = [NodePath("Archer"), NodePath("Archer2"), NodePath("Archer3")]
+metadata/_custom_type_script = "uid://cvjx1gm5hk423"
+
+[node name="Archer" parent="." unique_id=681092759 instance=ExtResource("2_vw5vr")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.21243429, 0, -0.7305885)
+
+[node name="Archer2" parent="." unique_id=1834440058 instance=ExtResource("2_vw5vr")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.58308554, 0, 0.4648453)
+
+[node name="Archer3" parent="." unique_id=190111554 instance=ExtResource("2_vw5vr")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.4931295, 0, 0.19021285)

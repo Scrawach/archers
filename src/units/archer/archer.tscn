@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://bc328voe0h73j"]
+
+[ext_resource type="Script" uid="uid://b0u17n3vu5tth" path="res://units/archer/archer.gd" id="1_ny684"]
+[ext_resource type="PackedScene" uid="uid://dnlq638ohij7k" path="res://units/archer/other/arrow.tscn" id="2_nwuam"]
+
+[sub_resource type="Curve" id="Curve_nwuam"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.20307693, 0), 0.0, 0.0, 0, 0, Vector2(0.3815385, 1), 0.0, 0.0, 0, 0, Vector2(0.9353847, 0.592752), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="BoxMesh" id="BoxMesh_nwuam"]
+size = Vector3(0.8, 1.8, 0.8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k2xv8"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_q28hf"]
+size = Vector3(2, 0.5, 0.5)
+
+[sub_resource type="Curve3D" id="Curve3D_ny684"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, -5, 0, 0, 5, 0, 9, 8, 0, 3, 0, 0, -5, 0, 0, 0, 16),
+"tilts": PackedFloat32Array(0, 0, 0)
+}
+point_count = 3
+
+[node name="Archer" type="Node3D" unique_id=681092759 node_paths=PackedStringArray("trajectory")]
+script = ExtResource("1_ny684")
+arrow_scene = ExtResource("2_nwuam")
+trajectory = NodePath("Path3D")
+curve = SubResource("Curve_nwuam")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=310814936]
+transform = Transform3D(0.65, 0, 0, 0, 0.65, 0, 0, 0, 0.65, 0, 0.6063365, 0)
+mesh = SubResource("BoxMesh_nwuam")
+surface_material_override/0 = SubResource("StandardMaterial3D_k2xv8")
+
+[node name="Archer Bow" type="Node3D" parent="." unique_id=1979394648]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Archer Bow" unique_id=1802361694]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+visible = false
+mesh = SubResource("BoxMesh_q28hf")
+
+[node name="Projectile SpawnPoint" type="Marker3D" parent="Archer Bow" unique_id=302478418]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="Path3D" type="Path3D" parent="." unique_id=531870390]
+curve = SubResource("Curve3D_ny684")
+debug_custom_color = Color(1, 1, 1, 1)
+
+[node name="PauseBeforeFire Timer" type="Timer" parent="." unique_id=7177943]
+unique_name_in_owner = true
+one_shot = true

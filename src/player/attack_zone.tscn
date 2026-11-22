@@ -1,0 +1,107 @@
+[gd_scene format=3 uid="uid://cwvaosc8bqyiv"]
+
+[ext_resource type="Script" uid="uid://b2e3j13fxv1u3" path="res://attack_zone.gd" id="1_6ep2p"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6ep2p"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.47058824)
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sjmac"]
+transparency = 1
+albedo_color = Color(1, 0, 0, 0.47058824)
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_lquwl"]
+
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_lquwl"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.5019608)
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_6ep2p"]
+viewport_path = NodePath("Sprite3D/SubViewport")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w48qg"]
+bg_color = Color(0, 0, 0, 0.7058824)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vivmo"]
+draw_center = false
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2cqfq"]
+draw_center = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yaehf"]
+bg_color = Color(1, 1, 1, 1)
+
+[node name="Attack Zone" type="Node3D" unique_id=1775644467]
+script = ExtResource("1_6ep2p")
+valid_material = SubResource("StandardMaterial3D_6ep2p")
+invalid_material = SubResource("StandardMaterial3D_sjmac")
+
+[node name="Attack Zone Mesh" type="MeshInstance3D" parent="." unique_id=379027759]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0)
+cast_shadow = 0
+mesh = SubResource("SphereMesh_lquwl")
+surface_material_override/0 = SubResource("ORMMaterial3D_lquwl")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=2093112665]
+pixel_size = 0.002
+billboard = 1
+no_depth_test = true
+fixed_size = true
+render_priority = 5
+texture = SubResource("ViewportTexture_6ep2p")
+
+[node name="SubViewport" type="SubViewport" parent="Sprite3D" unique_id=867108579]
+transparent_bg = true
+size = Vector2i(128, 128)
+
+[node name="Cooldown Container" type="PanelContainer" parent="Sprite3D/SubViewport" unique_id=877461043]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 38.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_w48qg")
+
+[node name="MarginContainer" type="MarginContainer" parent="Sprite3D/SubViewport/Cooldown Container" unique_id=373578427]
+layout_mode = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="PanelContainer" type="PanelContainer" parent="Sprite3D/SubViewport/Cooldown Container/MarginContainer" unique_id=301227615]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_vivmo")
+
+[node name="MarginContainer" type="MarginContainer" parent="Sprite3D/SubViewport/Cooldown Container/MarginContainer/PanelContainer" unique_id=825990291]
+layout_mode = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="AttackZone Progress" type="ProgressBar" parent="Sprite3D/SubViewport/Cooldown Container/MarginContainer/PanelContainer/MarginContainer" unique_id=477045625]
+unique_name_in_owner = true
+self_modulate = Color(0.84, 0.63252, 0.18480001, 1)
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_2cqfq")
+theme_override_styles/fill = SubResource("StyleBoxFlat_yaehf")
+max_value = 1.0
+value = 0.5
+show_percentage = false
+
+[node name="Cooldown Timer" type="Timer" parent="." unique_id=325626104]
+unique_name_in_owner = true
+one_shot = true

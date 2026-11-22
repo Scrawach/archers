@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://dqe7kkvljodbn"]
+
+[ext_resource type="PackedScene" uid="uid://oovt5txyfw7q" path="res://enemies/enemy.tscn" id="1_7hfrd"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_7hfrd"]
+radius = 2.0
+height = 4.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_7hfrd"]
+radius = 2.0
+
+[node name="Enemy" unique_id=633718175 instance=ExtResource("1_7hfrd")]
+speed = 1.4
+
+[node name="MeshInstance3D" parent="." index="0" unique_id=963079914]
+mesh = SubResource("CapsuleMesh_7hfrd")
+
+[node name="CollisionShape3D" parent="Hit Area3D" parent_id_path=PackedInt32Array(1592874030) index="0" unique_id=629857937]
+shape = SubResource("SphereShape3D_7hfrd")
+
+[node name="Health" parent="." index="3" unique_id=1897750748]
+max_health = 15

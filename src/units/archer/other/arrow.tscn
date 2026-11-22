@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://dnlq638ohij7k"]
+
+[ext_resource type="Script" uid="uid://bothbopnb8d1v" path="res://units/archer/other/arrow.gd" id="1_1ka5e"]
+[ext_resource type="PackedScene" uid="uid://bt8xxv3vg4xtb" path="res://units/archer/other/arrow_visual.tscn" id="2_0awmt"]
+[ext_resource type="PackedScene" uid="uid://d2dv5jxk1o2rb" path="res://units/archer/other/arrow_dead.tscn" id="2_pe1l1"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1ka5e"]
+radius = 0.1
+height = 1.2
+
+[node name="Arrow" type="Node3D" unique_id=1486331391]
+script = ExtResource("1_1ka5e")
+dead_mesh = ExtResource("2_pe1l1")
+
+[node name="Path3D" type="Path3D" parent="." unique_id=1478036648]
+unique_name_in_owner = true
+debug_custom_color = Color(1, 1, 1, 1)
+
+[node name="Arrow Follow3D" type="PathFollow3D" parent="Path3D" unique_id=914418206]
+unique_name_in_owner = true
+transform = Transform3D(6.726202e-08, 1, 4.918556e-08, 0.32574123, 2.45929e-08, -0.94545376, -0.94545376, 7.9615674e-08, -0.32574123, 0, 1.4110429, 0.27456468)
+
+[node name="Arrow Visual" parent="Path3D/Arrow Follow3D" unique_id=623675467 instance=ExtResource("2_0awmt")]
+unique_name_in_owner = true
+
+[node name="Hit Area3D" type="Area3D" parent="Path3D/Arrow Follow3D/Arrow Visual" unique_id=1215297783]
+unique_name_in_owner = true
+transform = Transform3D(1.0000001, 0, 0, -2.1316282e-14, -4.3711392e-08, -1, 0, 1.0000001, -4.3711395e-08, 0, 0, 0)
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Path3D/Arrow Follow3D/Arrow Visual/Hit Area3D" unique_id=2068716994]
+transform = Transform3D(1.0000001, 0, -2.9802322e-08, -4.0500936e-13, 1, -5.3290705e-15, 2.9802322e-08, 8.881784e-15, 1.0000001, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_1ka5e")
